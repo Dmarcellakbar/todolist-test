@@ -4,6 +4,7 @@ require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const path = require('path');
 
 const app = express();
 
@@ -24,6 +25,9 @@ app.use(cors({
   origin: process.env.VUE_APP_API_URL, // Adjust this to your Vue.js app's URL
 }));
 app.use(express.json());
+
+// Serve static files from the Vue app
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Endpoint to get all todos
 app.get('/todos', async (req, res) => {
