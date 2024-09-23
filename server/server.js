@@ -21,7 +21,7 @@ pool.connect()
   .catch(err => console.error('Connection error', err.stack));
 
 app.use(cors({
-  origin: 'https://todolist-test-nu.vercel.app', // Adjust this to your Vue.js app's URL
+  origin: process.env.VUE_APP_API_URL, // Adjust this to your Vue.js app's URL
 }));
 app.use(express.json());
 
