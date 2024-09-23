@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: process.env.VUE_APP_API_URL, // Your backend API URL
+        target: '*', // Your backend API URL
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
       },
