@@ -22,6 +22,8 @@ pool.connect()
   .catch(err => console.error('Connection error', err.stack));
 
 app.use(cors());
+app.options('*', cors()); // Enable pre-flight across-the-board
+
 app.use(express.json());
 
 // Serve static files from the Vue app
