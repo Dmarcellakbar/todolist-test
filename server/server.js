@@ -21,9 +21,7 @@ pool.connect()
   .then(() => console.log('Connected to PostgreSQL'))
   .catch(err => console.error('Connection error', err.stack));
 
-app.use(cors({
-  origin: process.env.VUE_APP_API_URL, // Adjust this to your Vue.js app's URL
-}));
+app.use(cors());
 app.use(express.json());
 
 // Serve static files from the Vue app
