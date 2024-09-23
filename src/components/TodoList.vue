@@ -23,19 +23,19 @@ export default {
   },
   methods: {
     async fetchTodos() {
-      const response = await axios.get('http://localhost:5002/todos');
+      const response = await axios.get(`${process.env.VUE_APP_API_URL}/todos`);
       this.todos = response.data;
     },
     async addTodo() {
       if (this.newTodo.trim() === '') return;
-      const response = await axios.post('http://localhost:5002/todos', {
+      const response = await axios.post(`${process.env.VUE_APP_API_URL}/todos`, {
         title: this.newTodo,
       });
       this.todos.push(response.data);
       this.newTodo = '';
     },
     async deleteTodo(id) {
-      await axios.delete(`http://localhost:5002/todos/${id}`);
+      await axios.delete(`${process.env.VUE_APP_API_URL}/todos/${id}`);
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
   },
