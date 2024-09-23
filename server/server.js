@@ -57,6 +57,6 @@ app.delete('/todos/:id', async (req, res) => {
 });
 
 // Start the server without specifying a port
-app.listen(process.env.PORT || 5002, () => {
+app.listen(process.env.PORT || 5432, () => {
   console.log(`Server running`, process.env.PORT);
 });
