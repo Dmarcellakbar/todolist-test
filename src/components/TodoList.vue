@@ -26,7 +26,7 @@ export default {
     async fetchTodos() {
 
       try {
-        const response = await axios.get(`${process.env.VUE_APP_API_URL}/todos`);
+        const response = await axios.get(`/todos`);
         this.todos = response.data;
       } catch (error) {
         console.error('Error fetching todos:', error);
@@ -35,7 +35,7 @@ export default {
     async addTodo() {
       if (this.newTodo.trim() === '') return;
       try {
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/todos`, {
+        const response = await axios.post(`/todos`, {
           title: this.newTodo,
         });
         this.todos.push(response.data);
@@ -46,7 +46,7 @@ export default {
     },
     async deleteTodo(id) {
       try {
-        await axios.delete(`${process.env.VUE_APP_API_URL}/todos/${id}`);
+        await axios.delete(`/todos/${id}`);
         this.todos = this.todos.filter((todo) => todo.id !== id);
       } catch (error) {
         console.error('Error deleting todo:', error);
