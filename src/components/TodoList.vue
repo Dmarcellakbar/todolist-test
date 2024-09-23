@@ -26,7 +26,7 @@ export default {
     async fetchTodos() {
 
       try {
-        const response = await axios.get(`/todos`);
+        const response = await axios.get(`postgres://default:tYoJnfq0ev5z@ep-icy-snow-a4jgiblw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require/todos`);
         this.todos = response.data;
       } catch (error) {
         console.error('Error fetching todos:', error);
@@ -35,7 +35,7 @@ export default {
     async addTodo() {
       if (this.newTodo.trim() === '') return;
       try {
-        const response = await axios.post(`/todos`, {
+        const response = await axios.post(`postgres://default:tYoJnfq0ev5z@ep-icy-snow-a4jgiblw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require/todos/todos`, {
           title: this.newTodo,
         });
         this.todos.push(response.data);
@@ -46,7 +46,7 @@ export default {
     },
     async deleteTodo(id) {
       try {
-        await axios.delete(`/todos/${id}`);
+        await axios.delete(`postgres://default:tYoJnfq0ev5z@ep-icy-snow-a4jgiblw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require/todos/todos/${id}`);
         this.todos = this.todos.filter((todo) => todo.id !== id);
       } catch (error) {
         console.error('Error deleting todo:', error);

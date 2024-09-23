@@ -9,7 +9,7 @@ const app = express();
 
 // PostgreSQL pool configuration using Vercel environment variables
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL, // Use Vercel's connection string environment variable
+  connectionString: 'postgres://default:tYoJnfq0ev5z@ep-icy-snow-a4jgiblw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require', // Use Vercel's connection string environment variable
   ssl: {
     rejectUnauthorized: false, // Allows connection with SSL mode, adjust if needed
   },
