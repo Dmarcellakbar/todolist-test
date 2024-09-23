@@ -24,7 +24,7 @@ export default {
   methods: {
     async fetchTodos() {
       try {
-        const response = await axios.get('/api/todos'); // Use the proxy endpoint
+        const response = await axios.get(process.env.VUE_APP_API_URL);
         this.todos = response.data;
       } catch (error) {
         console.error('Error fetching todos:', error);
@@ -33,7 +33,7 @@ export default {
     async addTodo() {
       if (this.newTodo.trim() === '') return;
       try {
-        const response = await axios.post('/api/todos', { // Use the proxy endpoint
+        const response = await axios.post(process.env.VUE_APP_API_URL, {
           title: this.newTodo,
         });
         this.todos.push(response.data);
@@ -44,7 +44,7 @@ export default {
     },
     async deleteTodo(id) {
       try {
-        await axios.delete(`/api/todos/${id}`); // Use the proxy endpoint
+        await axios.delete(`${process.env.VUE_APP_API_URL}/${id}`);
         this.todos = this.todos.filter((todo) => todo.id !== id);
       } catch (error) {
         console.error('Error deleting todo:', error);
@@ -53,6 +53,7 @@ export default {
   },
   mounted() {
     this.fetchTodos();
+    console.log('Available Environment Variables:', process.env.VUE_APP_API_URL);
   },
 };
 </script>
