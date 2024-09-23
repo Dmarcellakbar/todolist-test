@@ -1,5 +1,5 @@
 // Ensure this is at the top of your file to load environment variables
-require('dotenv').config({path: '../.env'});
+require('dotenv').config({ path: '../.env' });
 
 const express = require('express');
 const cors = require('cors');
@@ -9,13 +9,20 @@ const app = express();
 
 // PostgreSQL pool configuration using Vercel environment variables
 const pool = new Pool({
-  connectionString: 'postgres://default:tYoJnfq0ev5z@ep-icy-snow-a4jgiblw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require', // Use Vercel's connection string environment variable
+  connectionString: process.env.POSTGRES_URL, // Use the Vercel connection string
   ssl: {
-    rejectUnauthorized: false, // Allows connection with SSL mode, adjust if needed
+    rejectUnauthorized: false, // Allows connection with SSL mode
   },
 });
 
-app.use(cors());
+// Check PostgreSQL connection
+pool.connect()
+  .then(() => console.log('Connected to PostgreSQL'))
+  .catch(err => console.error('Connection error', err.stack));
+
+app.use(cors({
+  origin: 'https://todolist-test-nu.vercel.app', // Adjust this to your Vue.js app's URL
+}));
 app.use(express.json());
 
 // Endpoint to get all todos
@@ -58,5 +65,5 @@ app.delete('/todos/:id', async (req, res) => {
 
 // Start the server without specifying a port
 app.listen(process.env.PORT || 5002, () => {
-  console.log(`Server running`, process.env.PORT);
+  console.log(`Server running on port ${process.env.PORT || 5002}`);
 });
